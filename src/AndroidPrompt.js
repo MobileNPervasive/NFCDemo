@@ -8,7 +8,7 @@ const [hintText, setHintText] = React.useState('');
 React.useEffect(() => {
     if(ref) {
         ref.current = {
-            setHintText, 
+            setHintText,
             setVisible,
         };
     }
@@ -20,10 +20,10 @@ React.useEffect(() => {
                 <View style={[styles.backdrop, StyleSheet.absoluteFill]} />
 
                 <View style={styles.prompt}>
-                    <Text style={styles.hint}>{hintText || "Hello NFC"}</Text>
+                    <Text style={styles.hint}>Scan your NFC</Text>
 
-                    <TouchableOpacity 
-                    style={styles.btn} 
+                    <TouchableOpacity
+                    style={styles.btn}
                     onPress={() =>{
                         setVisible(false);
                         setHintText('');
@@ -32,7 +32,7 @@ React.useEffect(() => {
                     </TouchableOpacity>
                 </View>
             </View>
-        </Modal>       
+        </Modal>
     );
 }
 
@@ -46,10 +46,8 @@ const styles = StyleSheet.create({
     prompt: {
         position: 'absolute',
         bottom: 0,
-        left: 0,
-        width: Dimensions.get('window').width - 2*20,
+        width: Dimensions.get('window').width,
         backgroundColor: 'white',
-        borderRadius: 8,
         paddingVertical: 60,
         paddingHorizontal: 20,
         alignItems: 'center',

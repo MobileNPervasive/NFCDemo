@@ -12,24 +12,13 @@ function ScanNFC(props) {
         let count = 1;
         NfcManager.setEventListener(NfcEvents.DiscoverTag, tag => {
             count--;
-
-            if (Platform.OS === 'android') {
-                androidPromptRef.current.setHintText(`${count}`);
-            }else {NfcManager.setAlertMessageIOS(`${count}`);}
-          
             if( count <= 0 ) {
                 NfcManager.unregisterTagEvent().catch(() => 0);
                 setDuration(new Date().getTime() - start.getTime());
-
-                if (Platform.OS === 'android') {
-                    androidPromptRef.current.setVisible(false);
-                }
+                androidPromptRef.current.setVisible(false);
             }
         });
 
-        return () => {
-            NfcManager.setEventListener(NfcEvents.DiscoverTag, null);
-        };
     }, [start]);
 
     async function scanTag(){
@@ -43,8 +32,8 @@ function ScanNFC(props) {
 
     return (
         <View style={styles.wrapper}>
-            <Text>NFC on progess</Text>
-            {duration > 0 && <Text>Duration: {duration}ms</Text>}
+            <Text>NFC register tag demo</Text>
+            {duration > 0 && <Text>Scan time: {duration}ms</Text>}
             <TouchableOpacity styles={styles.btn} onPress={scanTag}>
                 <Text>START</Text>
             </TouchableOpacity>
@@ -52,7 +41,7 @@ function ScanNFC(props) {
         </View>
     );
 
-}  
+}
 
 const styles = StyleSheet.create({
     wrapper: {
@@ -65,7 +54,7 @@ const styles = StyleSheet.create({
         padding: 15,
         borderRadius: 8,
         backgroundColor: '#ccc',
-    }
+    },
 });
 
 export default ScanNFC;
